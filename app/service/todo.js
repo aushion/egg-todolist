@@ -3,10 +3,16 @@
 const Service = require('egg').Service;
 
 class TodoService extends Service {
-  async list() {
-    const result = await this.app.mysql.select('todolist');
-    console.log(result);
-    return result;
+  async list(params) {
+    const { pageSize, pageIndex } = params;
+
+    const allData = await this.app.mysql.select('todolist');
+    const result = await this.app.mysql.select('todolist', {
+      orders: [[ 'created_at', 'desc' ]],
+      limit: pageSize,
+      offset: pageSize * pageIndex - pageSize,
+    });
+    return { total: allData.length, data: result };
   }
 
   async create(params) {

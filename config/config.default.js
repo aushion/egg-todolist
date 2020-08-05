@@ -23,16 +23,26 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
   // mysql
-  config.mysql = {
-    client: {
-      host: '127.0.0.1',
-      port: '3306',
-      user: 'root',
-      password: 'chen19901230',
-      database: 'testdb',
-    },
-    app: true,
-    ageng: false,
+  // config.mysql = {
+  //   client: {
+  //     host: '127.0.0.1',
+  //     port: '3306',
+  //     user: 'root',
+  //     password: 'chen19901230',
+  //     database: 'testdb',
+  //   },
+  //   app: true,
+  //   agent: false,
+  // };
+
+  // sequelize
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    user: 'root',
+    password: 'chen19901230',
+    database: 'testdb',
   };
 
   // security
@@ -40,6 +50,11 @@ module.exports = appInfo => {
     csrf: {
       enable: false,
     },
+  };
+
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
   };
 
   return {
